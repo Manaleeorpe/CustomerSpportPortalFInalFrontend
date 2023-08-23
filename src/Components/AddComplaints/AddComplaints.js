@@ -88,24 +88,28 @@ function AddComplaints({ userData }) {
             className="bg-white p-5 rounded shadow"
             style={{
               backgroundColor: "#ffffff",
-              maxWidth: "600px",
+              maxWidth: "720px",
+              height: "40%",
               margin: "5px auto",
               padding: "20px",
               borderRadius: "10px",
-              border: "1px solid #ddd"
+              border: "1px solid #ddd",
+              overflow: "auto"
             }}
           >
-            <h1 className="mb-4" style={{ color: "#ac2358" }}>
+            <h1 className="mb-4" style={{ color: "#ac2358", fontSize: "30px" }}>
               Add Complaint
             </h1>
-            <h3 className="card-title" style={{ textTransform: 'lowercase', margin: "20px auto" }}>What can I help you with?</h3>
+            <h3 className="card-title" style={{ margin: "20px auto",fontSize: "20px" }}>What can I help you with?</h3>
             
             <form onSubmit={handleAdd}>
         <div className="mb-3">
+        <div style={{ position: "relative" }}>
         <select
             className="form-control"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            style={{ fontSize: "15px", padding: "5px" }}
           >
             <option value="">Select an option</option>
             <option value="Login And Account">Account login issues</option>
@@ -119,6 +123,8 @@ function AddComplaints({ userData }) {
             <option value="Billing or fee disputes">Billing or fee disputes</option>
             <option value="Other">Other</option>
           </select>
+          <div style={{ position: "absolute", top: "50%", right: "10px", transform: "translateY(-50%)" }}>&#9660;</div>
+              </div>
           {description === "Other" && (
             <input
               type="text"
@@ -126,6 +132,7 @@ function AddComplaints({ userData }) {
               placeholder="Enter description"
               value={otherDescription}
               onChange={(e) => setOtherDescription(e.target.value)}
+              style={{ fontSize: "16px", padding: "10px" }}
             />
           )}
               </div>
@@ -139,7 +146,8 @@ function AddComplaints({ userData }) {
                   color: "#fff",
                   border: "none",
                   cursor: "pointer",
-                  fontSize: "13px"
+                  fontSize: "16px", // Adjust font size
+                  padding: "10px 12px", // Adjust padding
                 }}
               >
                 Add Complaint
@@ -189,4 +197,4 @@ function AddComplaints({ userData }) {
   );
 }
 
-  export default AddComplaints;
+  export default AddComplaints
