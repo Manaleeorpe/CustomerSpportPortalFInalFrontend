@@ -96,7 +96,7 @@ function Register() {
             <MDBCardBody className='d-flex flex-column'>
 
               <div className='d-flex flex-row mt-2'>
-                <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#ff6219' }}/>
+                <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#98144d' }}/>
                 <span className="h1 fw-bold mb-0">Customer Support Portal</span>
               </div>
 
@@ -126,7 +126,7 @@ function Register() {
                     }}/>
 
 
-              <MDBBtn className="mb-4 px-5" color='dark' size='lg' onClick={handleRegister}>Register</MDBBtn>
+              <MDBBtn className="mb-4 px-5" style={{ backgroundColor: '#98144d' }} size='lg' onClick={handleRegister}>Register</MDBBtn>
               <div>
               {failMessage && (
                 <div className="alert alert-fail" role="alert" style={{ backgroundColor: 'red', color: 'white' }}>

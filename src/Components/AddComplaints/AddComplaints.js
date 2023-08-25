@@ -60,13 +60,17 @@ function AddComplaints({ userData }) {
     .then(async (response) => {
       const responseBody = await response.json(); // Parse the response body as JSON
       if (response.ok) {
-        setSuccessMessage(`${responseBody.adminName} has been assigned to your complaint`);
-        setResponse(responseBody.message);
-        setFaqs(responseBody.faqs); // Extract the message from the response
+        const { adminName, complaintid, message, faqs } = responseBody;
+        console.log("Extracted complaintid:", complaintid); 
+        const successMessage = `${adminName} has been assigned to your complaint. Your complaint ID is ${complaintid}. ${message}`;
+  
+        setSuccessMessage(successMessage);
+        setResponse(message);
+        setFaqs(faqs);
+  
         setTimeout(() => {
           setSuccessMessage("");
           setResponse("");
-          // Update the state with FAQs
         }, 9000);
       } else {
         setErrorMessage("Error adding a complaint");

@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo} from "react";
 import { Card, CardBody, CardTitle, Table } from "reactstrap";
-import user1 from "../../assets/images/users/user1.jpg";
-import user2 from "../../assets/images/users/user2.jpg";
-import user3 from "../../assets/images/users/user3.jpg";
-import user4 from "../../assets/images/users/user4.jpg";
-import user5 from "../../assets/images/users/user5.jpg";
+import user1 from "../../assets/images/users/user1.jpeg";
+import user2 from "../../assets/images/users/user2.jpeg";
+import user3 from "../../assets/images/users/user3.jpeg";
+import user4 from "../../assets/images/users/user4.jpeg";
+import user5 from "../../assets/images/users/user5.jpeg";
 
 function ProjectTables() {
   const [complaints, setComplaints] = useState([]);
-  const [customerNames, setCustomerNames] = useState({});
+  const [adminComments, setAdminComments] = useState("");
   const adminid = localStorage.getItem('adminid');
   const [statusMessage, setStatusMessage] = useState("");
+  
 
   useEffect(() => {
     if (adminid) {
@@ -19,6 +20,7 @@ function ProjectTables() {
       console.log('adminid is missing. Cannot fetch complaints.');
     }
   }, [adminid]);
+
 
   const fetchComplaints = async () => {
     try {
@@ -32,11 +34,11 @@ function ProjectTables() {
     }
   };
 
-  const getRandomUserImage = () => {
+  const randomUserImage = useMemo(() => {
     const users = [user1, user2, user3, user4, user5];
     const randomIndex = Math.floor(Math.random() * users.length);
     return users[randomIndex];
-  };
+  }, []);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -47,7 +49,8 @@ function ProjectTables() {
     let endpoint = `http://localhost:8080/auth/admin/updateComplaint/${complaintid}`;
   
     const requestBody = {
-      status: status // Add other fields if needed
+      status: status,
+      adminComments: adminComments
     };
   
     fetch(endpoint, {
@@ -66,6 +69,8 @@ function ProjectTables() {
           alert("Complaint did not update");
         }
       });
+
+      
   };
 
   return (
@@ -78,13 +83,15 @@ function ProjectTables() {
             <thead>
               <tr>
                 <th>Customer</th>
-                <th>Date</th>
+                <th>Complaint Date</th>
                 <th>Complaint Type</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th></th>
+                <th>Comments</th>
               </tr>
             </thead>
+            
             <tbody>
               {complaints && complaints.length > 0 ? (
                 complaints
@@ -94,7 +101,7 @@ function ProjectTables() {
                       <td>
                         <div className="d-flex align-items-center p-2">
                           <img
-                            src={getRandomUserImage()}
+                            src={randomUserImage}
                             className="rounded-circle"
                             alt="avatar"
                             width="45"
@@ -114,11 +121,19 @@ function ProjectTables() {
                       <td>
                         <button
                           className="btn btn-success mr-2"
-                          onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved")}
+                          onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved" , complaint.adminComments)}
                         >
                           Resolved
                         </button>
                       </td>
+                      <td>
+                          <input
+                            className="form-control"
+                            value={complaint.adminComments}
+                            placeholder="Comments"
+                            onChange={(e) => setAdminComments(e.target.value)}
+                          />
+                        </td>
                     </tr>
                   ))
               ) : (

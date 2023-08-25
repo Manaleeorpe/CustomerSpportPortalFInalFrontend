@@ -86,7 +86,15 @@ function ComplaintTables() {
       });
   };
 
-  const handleCandcellation = (complaintid) => {
+  const handleCancellationWithConfirmation = (complaintid) => {
+    const confirmCancellation = window.confirm("Are you sure you want to cancel this complaint?");
+    if (confirmCancellation) {
+      handleCancellation(complaintid);
+    }
+  };
+
+
+  const handleCancellation = (complaintid) => {
 
     let endpoint = `http://localhost:8080/auth/customer/${customerid}/cancel-complaint/${complaintid}`;
     
@@ -107,6 +115,7 @@ function ComplaintTables() {
         }
       });
   };
+
 
   return (
     <div >
@@ -171,7 +180,7 @@ function ComplaintTables() {
                         {complaint.status === "Pending" &&
                         <button
                           className="btn btn-success mr-2"
-                          onClick={() => handleCandcellation(complaint.complaintid, "Cancelled")}
+                          onClick={() => handleCancellationWithConfirmation(complaint.complaintid)}
                         >
                           Cancel Complaint
                         </button>
