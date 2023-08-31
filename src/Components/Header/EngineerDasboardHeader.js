@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function EngineerDashboardHeader() {
   return (
-    <Navbar style={{ backgroundColor: "#98144d", padding: "5px 20px", position: "relative" }} expand="lg" variant="dark">
+    <Navbar style={{ backgroundColor: "#98144d", position: "relative", marginTop: "-7px"  }} expand="lg" variant="dark">
       <Link to="/" className="navbar-brand">
         <img
           src="/img/Axis Bank.png"
@@ -16,10 +16,9 @@ function EngineerDashboardHeader() {
           alt="logo"
         />
       </Link>
-      <Link to="/" style={{ color: "#fff", textDecoration: "none", transition: "color 0.3s", fontSize: "16px" }}>
-            <FontAwesomeIcon icon={faHome} style={{ marginLeft: "1210px" }} />
-          </Link>
-      
+      <Link to="/" style={{ color: "#fff", textDecoration: "none", transition: "color 0.3s", fontSize: "16px", position: "absolute", right: "50px", top: "50%", transform: "translateY(-50%)" }}>
+        <FontAwesomeIcon icon={faHome} />
+      </Link>
     </Navbar>
   );
 }

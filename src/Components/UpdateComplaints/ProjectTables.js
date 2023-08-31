@@ -87,8 +87,8 @@ function ProjectTables() {
                 <th>Complaint Type</th>
                 <th>Description</th>
                 <th>Status</th>
-                <th></th>
                 <th>Comments</th>
+                <th></th>
               </tr>
             </thead>
             
@@ -118,14 +118,7 @@ function ProjectTables() {
                       <td>
                         <span className="p-2 bg-warning rounded-circle d-inline-block ms-3"></span>
                       </td>
-                      <td>
-                        <button
-                          className="btn btn-success mr-2"
-                          onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved" , complaint.adminComments)}
-                        >
-                          Resolved
-                        </button>
-                      </td>
+                     
                       <td>
                           <input
                             className="form-control"
@@ -134,6 +127,15 @@ function ProjectTables() {
                             onChange={(e) => setAdminComments(e.target.value)}
                           />
                         </td>
+
+                        <td>
+                        <button
+                          className="btn btn-success mr-2"
+                          onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved" , complaint.adminComments)}
+                        >
+                          Resolved
+                        </button>
+                      </td>  
                     </tr>
                   ))
               ) : (
@@ -157,4 +159,4 @@ function ProjectTables() {
   );
 }
 
-export default ProjectTables;
+export default ProjectTables

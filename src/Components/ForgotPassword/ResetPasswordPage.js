@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-
+import './ResetPassword.css';
+import EngineerDashboardHeader from '../Header/EngineerDasboardHeader';
+import Axisgirl from "../../assets/images/bg/axis girl.png";
 
 import {
     MDBBtn,
@@ -93,66 +95,73 @@ function ResetPasswordPage() {
   }
 
   return (
-    <MDBContainer className="my-5">
-      <MDBCard>
+    <div>
+      <EngineerDashboardHeader />
+      <MDBContainer className="my-5">
         <MDBRow className="g-0">
-          <MDBCol md="6">
+          <MDBCol md="6" style={{ marginTop: '50px' }}>
             <MDBCardImage
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
-              alt="reset password form"
-              className="card-image rounded-start w-100"
+              src={Axisgirl}
+              alt="login form"
+              className="rounded-start w-100"
             />
           </MDBCol>
           <MDBCol md="6">
-            <MDBCardBody className="d-flex flex-column card-body">
-              <h5 className="fw-normal my-4 pb-3" style={{ letterSpacing: '1px' }}>
-                Reset Password
-              </h5>
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Token"
-                id="formControlLg"
-                type="text"
-                size="lg"
-                value={token}
-                readOnly
-              />
-              <MDBInput
-                wrapperClass="mb-4"
-                label="New Password"
-                id="formControlLg"
-                type="password"
-                size="lg"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Confirm Password"
-                id="formControlLg"
-                type="password"
-                size="lg"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              <MDBBtn
-                className="mb-4 px-5"
-                color="dark"
-                size="lg"
-                onClick={handleResetPassword}
-              >
-                Reset Password
-              </MDBBtn>
-              {errorMessage && (
-                <div className="alert alert-danger" role="alert">
-                  {errorMessage}
+            <MDBCard className="custom-card-column">
+              <MDBCardBody>
+                <div className='d-flex flex-row mt-2'>
+                  <img src="/img/Axis.jpeg" alt="Axis" style={{ width: '3rem', height: '3rem', marginRight: '0.75rem', color: '#98144d' }} />
+                  <span className="h1 fw-bold mb-0">Customer Support Portal</span>
                 </div>
-              )}
-            </MDBCardBody>
+                <h5 className="fw-normal my-4 pb-3" style={{ letterSpacing: '1px' }}>
+                  Reset Password
+                </h5>
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Token"
+                  id="formControlLg"
+                  type="text"
+                  size="lg"
+                  value={token}
+                  readOnly
+                />
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="New Password"
+                  id="formControlLg"
+                  type="password"
+                  size="lg"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Confirm Password"
+                  id="formControlLg"
+                  type="password"
+                  size="lg"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <MDBBtn
+                  className="mb-4 px-5"
+                  style={{ backgroundColor: '#98144d', width: "650px", marginTop: "20px" }}
+                  size="lg"
+                  onClick={handleResetPassword}
+                >
+                  Reset Password
+                </MDBBtn>
+                {errorMessage && (
+                  <div className="alert alert-danger" role="alert">
+                    {errorMessage}
+                  </div>
+                )}
+              </MDBCardBody>
+            </MDBCard>
           </MDBCol>
         </MDBRow>
-      </MDBCard>
-    </MDBContainer>
+      </MDBContainer>
+    </div>
   );
 }
 

@@ -11,7 +11,9 @@ function ComplaintTables() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredComplaints, setFilteredComplaints] = useState([]);
   const currentDate = new Date();
-
+  const [isCancelConfirmationOpen, setCancelConfirmationOpen] = useState(false);
+  const [cancelComplaintId, setCancelComplaintId] = useState(null);
+  
   useEffect(() => {
     fetchComplaints();
   }, []);
@@ -87,11 +89,10 @@ function ComplaintTables() {
   };
 
   const handleCancellationWithConfirmation = (complaintid) => {
-    const confirmCancellation = window.confirm("Are you sure you want to cancel this complaint?");
-    if (confirmCancellation) {
-      handleCancellation(complaintid);
-    }
+    setCancelComplaintId(complaintid);
+   setCancelConfirmationOpen(true);
   };
+
 
 
   const handleCancellation = (complaintid) => {
@@ -107,7 +108,11 @@ function ComplaintTables() {
     })
       .then((response) => {
         if (response.ok) {
-          setTimeout(() => setStatusMessage(""), 2000)
+          setTimeout(() => {
+            setStatusMessage("");
+            setCancelConfirmationOpen(false); // Close the dialog
+          }, 2000);
+    
           setStatusMessage(`Complaint cancelled`);
           fetchComplaints();
         } else {
@@ -115,7 +120,6 @@ function ComplaintTables() {
         }
       });
   };
-
 
   return (
     <div >
@@ -152,6 +156,7 @@ function ComplaintTables() {
                 <th>Status</th>
                 <th>Cancel</th>
                 <th>rating</th>
+                <th>Admin Comments</th>
                 
                 <th></th>
               </tr>
@@ -186,8 +191,11 @@ function ComplaintTables() {
                         </button>
                         }
                         </td>
+
+                       
+
                       <td>
-                      {complaint.status === "Resolved" && ( // Only render the Rating if status is "Pending"
+                      {complaint.status === "Resolved" && ( 
                       <>
                         <Mui.Typography component="legend">
                           {complaint.rating === null ? "No rating given" : `Rating: ${complaint.rating}`}
@@ -204,6 +212,11 @@ function ComplaintTables() {
                    }
                    </td>
                    <td>
+                   <td>
+                      {complaint.status === "Resolved" && complaint.adminComments && (
+                        complaint.adminComments
+                      )}
+                    </td>
                      
                     </td>
 
@@ -226,6 +239,32 @@ function ComplaintTables() {
               </div>
             </div>
           )}
+          <Mui.Dialog
+  open={isCancelConfirmationOpen}
+  onClose={() => setCancelConfirmationOpen(false)}
+>
+  <Mui.DialogTitle>Confirm Cancellation</Mui.DialogTitle>
+  <Mui.DialogContent>
+    <Mui.DialogContentText>
+      Are you sure you want to cancel this complaint?
+    </Mui.DialogContentText>
+  </Mui.DialogContent>
+  <Mui.DialogActions>
+    <button
+      className="btn btn-danger"
+      onClick={() => handleCancellation(cancelComplaintId)}
+    >
+      Confirm
+    </button>
+    <button
+      className="btn btn-secondary"
+      onClick={() => setCancelConfirmationOpen(false)}
+    >
+      Cancel
+    </button>
+  </Mui.DialogActions>
+</Mui.Dialog>
+
     </div>
   );
 }

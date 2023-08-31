@@ -71,7 +71,7 @@ function AddComplaints({ userData }) {
         setTimeout(() => {
           setSuccessMessage("");
           setResponse("");
-        }, 9000);
+        }, 15000);
       } else {
         setErrorMessage("Error adding a complaint");
       }
@@ -84,21 +84,22 @@ function AddComplaints({ userData }) {
     return (
       <div >
         <NavbarComplaints />
-
+        
       <div className="container-fluid">
         </div>
         <div className="col-md-12 p-4">
           <div
-            className="bg-white p-5 rounded shadow"
+            className="custom-card"
             style={{
               backgroundColor: "#ffffff",
               maxWidth: "720px",
               height: "40%",
               margin: "5px auto",
-              padding: "20px",
+              padding: "40px",
               borderRadius: "10px",
               border: "1px solid #ddd",
               overflow: "auto"
+              
             }}
           >
             <h1 className="mb-4" style={{ color: "#ac2358", fontSize: "30px" }}>

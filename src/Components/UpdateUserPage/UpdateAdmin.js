@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import user2 from "../../assets/images/users/user2.jpg";
+import user2 from "../../assets/images/users/user2.jpeg";
 import Sidebar from '../Sidebar'; 
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";

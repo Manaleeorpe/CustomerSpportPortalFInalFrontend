@@ -1,5 +1,9 @@
 
-body {
-    background-color: #9A616D;
-  }
-  
+
+.custom-card-column {
+  background-color: white; /* Set your desired background color */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Custom box shadow */
+  padding: 20px; /* Add padding around the card */
+  margin-top: 70px; /* Adjust as needed */
+  width: 90vh; /* Adjust the height as needed */
+}
