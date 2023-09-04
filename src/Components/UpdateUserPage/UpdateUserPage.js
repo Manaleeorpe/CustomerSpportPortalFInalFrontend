@@ -88,7 +88,7 @@ function UpdateUserPage() {
 
   return (
     <div>
-      <Navbar style={{ backgroundColor: "#98144d", padding: "5px 20px", position: "relative" }} expand="lg" variant="dark">
+      <Navbar style={{ backgroundColor: "#98144d", position: "relative", marginTop: "-7px"  }} expand="lg" variant="dark">
       <Link to="/" className="navbar-brand">
         <img
           src="/img/Axis Bank.png"

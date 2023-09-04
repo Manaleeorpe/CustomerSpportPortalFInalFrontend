@@ -28,6 +28,7 @@ function ResetPasswordPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const queryToken = new URLSearchParams(location.search).get('token');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     // Send a request to your backend to verify the token
@@ -76,6 +77,11 @@ function ResetPasswordPage() {
 
       if (response.ok) {
         setResetSuccess(true);
+        setShowSuccessMessage(true);
+        setTimeout(() => {
+          setShowSuccessMessage(false); // Hide success message after 3 seconds
+          navigate('/login'); // Redirect to login page
+        }, 3000);
       } else {
         const errorResponse = await response.json();
         setErrorMessage(errorResponse.message);
@@ -84,11 +90,6 @@ function ResetPasswordPage() {
       console.error('Error occurred:', error);
     }
   };
-
-  if (resetSuccess) {
-    navigate('/login');
-    return null;
-  }
 
   if (!tokenValid) {
     return <div>Invalid token.</div>;
@@ -110,7 +111,7 @@ function ResetPasswordPage() {
             <MDBCard className="custom-card-column">
               <MDBCardBody>
                 <div className='d-flex flex-row mt-2'>
-                  <img src="/img/Axis.jpeg" alt="Axis" style={{ width: '3rem', height: '3rem', marginRight: '0.75rem', color: '#98144d' }} />
+                  <img src="/img/axis a.png" alt="Axis" style={{ width: '3rem', height: '3rem', marginRight: '0.75rem', color: '#98144d' }} />
                   <span className="h1 fw-bold mb-0">Customer Support Portal</span>
                 </div>
                 <h5 className="fw-normal my-4 pb-3" style={{ letterSpacing: '1px' }}>
@@ -152,9 +153,16 @@ function ResetPasswordPage() {
                   Reset Password
                 </MDBBtn>
                 {errorMessage && (
-                  <div className="alert alert-danger" role="alert">
+                  <div className="alert alert-danger" 
+                  role="alert"
+                  style={{ backgroundColor: 'red', color: 'white' }}>
                     {errorMessage}
                   </div>
+                )}
+                {showSuccessMessage && (
+                <div className="alert alert-success" role="alert">
+                 Password reset successful! Redirecting to login page...
+                </div>
                 )}
               </MDBCardBody>
             </MDBCard>
@@ -165,4 +173,4 @@ function ResetPasswordPage() {
   );
 }
 
-export default ResetPasswordPage;
+export default ResetPasswordPage

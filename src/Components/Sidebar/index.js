@@ -24,12 +24,20 @@ const Sidebar = () => {
             <NavLink exact to="/login/EngineerDashboard/postfaqs" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table" style={{ color: '#524545' }}>Post FAQ's</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/complaint-chart" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line" style={{ color: '#524545' }}>chart</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/AdminComplaintChart" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line" style={{ color: '#524545' }}>Admin Performance</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/updateAdmin" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user" style={{ color: '#524545' }}>Edit Profile</CDBSidebarMenuItem>
             </NavLink>
+            
             <NavLink exact to="/login/EngineerDashboard/logout" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user" style={{ color: '#524545' }}>Logout</CDBSidebarMenuItem>
             </NavLink>
+            
             
           </CDBSidebarMenu>
         </CDBSidebarContent>

@@ -38,6 +38,7 @@ function ForgotPasswordPage() {
         if (response.ok) {
           setSuccessMessage('Password reset instructions sent to your email.');
           navigate('/reset-password');
+          
         } else {
           const errorResponse = await response.json();
           setErrorMessage(errorResponse.message);
@@ -95,10 +96,12 @@ function ForgotPasswordPage() {
               </div>
             )}
             {errorMessage && (
-              <div className="alert alert-danger" role="alert">
-                {errorMessage}
-              </div>
-            )}
+                  <div className="alert alert-danger" 
+                  role="alert"
+                  style={{ backgroundColor: 'red', color: 'white' }}>
+                    {errorMessage}
+                  </div>
+                )}
           </MDBCardBody>
         </MDBCol>
       </MDBRow>

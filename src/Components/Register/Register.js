@@ -70,7 +70,7 @@ function Register() {
             setTimeout(() => {
               setSuccessMessage(""); // Hide the success message after 3 seconds
               navigate("/login");
-            }, 1000);
+            }, 3000);
           // You can redirect the user to a login page or perform any other actions here
           
         } else {
@@ -182,6 +182,16 @@ function Register() {
                       </div>
                     )}
                   </div>
+                     {successMessage && (
+                      <div
+                      className="alert alert-success"
+                      role="alert"
+                     style={{ backgroundColor: 'green', color: 'white' }}
+                   >
+                      {successMessage}
+                    </div>
+                   )}
+ 
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>

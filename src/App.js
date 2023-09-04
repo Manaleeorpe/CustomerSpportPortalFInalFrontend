@@ -26,6 +26,8 @@ import ResetPasswordPage from "./Components/ForgotPassword/ResetPasswordPage";
 import UpdateUserPage from "./Components/UpdateUserPage/UpdateUserPage";
 import ViewComplaints from "./Components/ViewComplaints/ViewComplaints";
 import UpdateAdmin from "./Components/UpdateUserPage/UpdateAdmin";
+import ComplaintChart from "./Components/ComplaintChart";
+import AdminComplaintChart from "./Components/AdminComplaintChart";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -93,6 +95,8 @@ function App() {
           <Route path="/login/EngineerDashboard/postfaqs" element={<AddFAQsPage />} />
           <Route path="/login/EngineerDashboard/logout" element={<Logout />} />   
           <Route path="/AddComplaints" element={<AddComplaints userData={userData} />} />
+          <Route path="/complaint-chart" element={<ComplaintChart />} />
+          <Route path="/AdminComplaintChart" element={<AdminComplaintChart />} />
         </Routes>
       </Router>
     </TokenContextProvider>

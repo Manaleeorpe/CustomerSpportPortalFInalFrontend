@@ -62,7 +62,7 @@ function AddComplaints({ userData }) {
       if (response.ok) {
         const { adminName, complaintid, message, faqs } = responseBody;
         console.log("Extracted complaintid:", complaintid); 
-        const successMessage = `${adminName} has been assigned to your complaint. Your complaint ID is ${complaintid}. ${message}`;
+        const successMessage = `Your complaint ID is ${complaintid}. ${adminName} has been assigned to your complaint.`;
   
         setSuccessMessage(successMessage);
         setResponse(message);

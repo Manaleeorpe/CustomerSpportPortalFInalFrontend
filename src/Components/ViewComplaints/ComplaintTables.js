@@ -51,12 +51,12 @@ function ComplaintTables() {
     let EndDate = new Date(dateString);
 
     if (complaintType === "Level 2") {
-      EndDate.setDate(currentDate.getDate() + 1);
+      EndDate.setDate(EndDate.getDate() + 1);
     } else if (complaintType === "Level 3") {
-      EndDate.setDate(currentDate.getDate() + 2);
+      EndDate.setDate(EndDate.getDate() + 2);
     }
   
-    return currentDate.toLocaleDateString(undefined, options);
+    return EndDate.toLocaleDateString(undefined, options);
   };
 
   const formatStartDate = (dateString) => {
