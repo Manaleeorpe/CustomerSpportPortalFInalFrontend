@@ -11,8 +11,8 @@ function ProjectTables() {
   const [adminComments, setAdminComments] = useState("");
   const adminid = localStorage.getItem('adminid');
   const [statusMessage, setStatusMessage] = useState("");
+  const [loadingComplaint, setLoadingComplaint] = useState(null); 
   
-
   useEffect(() => {
     if (adminid) {
       fetchComplaints();
@@ -52,6 +52,7 @@ function ProjectTables() {
       status: status,
       adminComments: adminComments
     };
+    setLoadingComplaint(complaintid);
   
     fetch(endpoint, {
       method: "PUT",
@@ -68,6 +69,7 @@ function ProjectTables() {
         } else {
           alert("Complaint did not update");
         }
+        setLoadingComplaint(null);
       });
 
       
@@ -129,13 +131,19 @@ function ProjectTables() {
                         </td>
 
                         <td>
-                        <button
-                          className="btn btn-success mr-2"
-                          onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved" , complaint.adminComments)}
-                        >
-                          Resolved
-                        </button>
-                      </td>  
+                        {loadingComplaint === complaint.complaintid ? (
+                          <div className="text-center">
+                            <i className="fa fa-spinner fa-spin"></i> Please wait...
+                          </div>
+                        ) : (
+                          <button
+                            className="btn btn-success mr-2"
+                            onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved")}
+                          >
+                            Resolved
+                          </button>
+                        )}
+                      </td>
                     </tr>
                   ))
               ) : (
@@ -159,4 +167,4 @@ function ProjectTables() {
   );
 }
 
-export default ProjectTables
+export default ProjectTables;

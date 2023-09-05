@@ -1,19 +1,20 @@
-import React, { useState, useContext , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar";
-import './AddComplaints.css';
+import "./AddComplaints.css";
 import NavbarComplaints from "../NavbarComplaints/NavbarComplaints";
 
 function AddComplaints({ userData }) {
   const navigate = useNavigate();
-  const[description, setDescription] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); 
+  const [description, setDescription] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const customerid = localStorage.getItem('customerid');
+  const customerid = localStorage.getItem("customerid");
   const [response, setResponse] = useState("");
-  const[faqs, setFaqs] = useState([]);
+  const [faqs, setFaqs] = useState([]);
   const [otherDescription, setOtherDescription] = useState("");
-  
+  const [loadingMessage, setLoadingMessage] = useState("Please wait");
+  const [isLoading, setIsLoading] = useState(true); // Initialize isLoading to true
 
   useEffect(() => {
     // Fetch FAQs from the server
@@ -21,14 +22,23 @@ function AddComplaints({ userData }) {
       .then((response) => response.json())
       .then((data) => {
         setFaqs(data);
+        setIsLoading(false); // Set isLoading to false when data is fetched
       })
       .catch((error) => {
         console.error("Error fetching FAQs:", error);
+        setIsLoading(false); // Set isLoading to false on error as well
       });
   }, []);
 
+  // Helper function to update loading message
+  const updateLoadingMessage = () => {
+    setLoadingMessage((prevMessage) =>
+      prevMessage === "Please wait ..." ? "Please wait" : prevMessage + "."
+    );
+  };
+
   let requestBody = {
-    description: description, 
+    description: description,
   };
 
   const handleAdd = (e) => {
@@ -37,7 +47,7 @@ function AddComplaints({ userData }) {
       setErrorMessage("Description cannot be empty.");
       return;
     }
-   
+  
     if (description === "Other") {
       if (!otherDescription) {
         setErrorMessage("Other description cannot be empty.");
@@ -48,142 +58,171 @@ function AddComplaints({ userData }) {
       };
     }
   
-
+    setIsLoading(true); // Set isLoading to true when the API request is made
     fetch(`http://localhost:8080/auth/customer/${customerid}/add-complaint`, {
       method: "POST",
-      credentials: 'include',
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
     })
-    .then(async (response) => {
-      const responseBody = await response.json(); // Parse the response body as JSON
-      if (response.ok) {
-        const { adminName, complaintid, message, faqs } = responseBody;
-        console.log("Extracted complaintid:", complaintid); 
-        const successMessage = `Your complaint ID is ${complaintid}. ${adminName} has been assigned to your complaint.`;
+      .then(async (response) => {
+        const responseBody = await response.json(); // Parse the response body as JSON
+        if (response.ok) {
+          const { adminName, complaintid, message, faqs } = responseBody;
+          console.log("Extracted complaintid:", complaintid);
+          const successMessage = `Your complaint ID is ${complaintid}. ${adminName} has been assigned to your complaint.`;
   
-        setSuccessMessage(successMessage);
-        setResponse(message);
-        setFaqs(faqs);
+          setSuccessMessage(successMessage);
+          setResponse(message);
+          setFaqs(faqs);
   
-        setTimeout(() => {
-          setSuccessMessage("");
-          setResponse("");
-        }, 15000);
-      } else {
-        setErrorMessage("Error adding a complaint");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      alert("Error adding a complaint");
-    });
-};
-    return (
-      <div >
-        <NavbarComplaints />
-        
-      <div className="container-fluid">
-        </div>
-        <div className="col-md-12 p-4">
-          <div
-            className="custom-card"
-            style={{
-              backgroundColor: "#ffffff",
-              maxWidth: "720px",
-              height: "40%",
-              margin: "5px auto",
-              padding: "40px",
-              borderRadius: "10px",
-              border: "1px solid #ddd",
-              overflow: "auto"
-              
-            }}
-          >
-            <h1 className="mb-4" style={{ color: "#ac2358", fontSize: "30px" }}>
-              Add Complaint
-            </h1>
-            <h3 className="card-title" style={{ margin: "20px auto",fontSize: "20px" }}>What can I help you with?</h3>
-            
-            <form onSubmit={handleAdd}>
-        <div className="mb-3">
-        <div style={{ position: "relative" }}>
-        <select
-            className="form-control"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            style={{ fontSize: "15px", padding: "5px" }}
-          >
-            <option value="">Select an option</option>
-            <option value="Login And Account">Account login issues</option>
-            <option value="Incorrect transaction amount">Incorrect transaction amount</option>
-            <option value="Simple balance inquiries">Simple balance inquiries</option>
-            <option value="Lost or stolen card cases">Card and ATM</option>
-            <option value="Address or contact information updates">Address or contact information updates</option>
-            <option value="Urgent loan or mortgage inquiries">Urgent loan or mortgage inquiries</option>
-            <option value="Technical issues on the bank's app or website">Technical issues on the bank's app or website</option>
-            <option value="Account security concerns">Account security concerns</option>
-            <option value="Billing or fee disputes">Billing or fee disputes</option>
-            <option value="Other">Other</option>
-          </select>
-          <div style={{ position: "absolute", top: "50%", right: "10px", transform: "translateY(-50%)" }}>&#9660;</div>
-              </div>
-          {description === "Other" && (
-            <input
-              type="text"
-              className="form-control mt-2"
-              placeholder="Enter description"
-              value={otherDescription}
-              onChange={(e) => setOtherDescription(e.target.value)}
-              style={{ fontSize: "16px", padding: "10px" }}
-            />
-          )}
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                style={{
-                  borderRadius: "5px",
-                  backgroundColor: "#ac2358",
-                  margin: "10px auto",
-                  color: "#fff",
-                  border: "none",
-                  cursor: "pointer",
-                  fontSize: "16px", // Adjust font size
-                  padding: "10px 12px", // Adjust padding
-                }}
-              >
-                Add Complaint
-              </button>
-            </form>
-            
-            {errorMessage && (
-              <p className="text-danger" style={{ color: "red" }}>
-                {errorMessage}
-              </p>
-            )}
-      
-            {response && (
-              <p className="response-message" style={{ color: "#666" }}>
-                {response}
-              </p>
-            )}
+          // Remove the loading message once the success message is displayed
+          setIsLoading(false);
+        } else {
+          setErrorMessage("Error adding a complaint");
+          setIsLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error adding a complaint");
+        setIsLoading(false);
+      });
+  };
+  
+  useEffect(() => {
+    if (!isLoading) return;
 
-            {successMessage && (
-              <p className="text-success" style={{ color: "#333" }}>
-                {successMessage}
-              </p>
-            )}
-          </div>
-          
-          <div id="faq" className="text-center">
-            <div className="container">
-              <div className="section-title">
-                <h2>FAQs</h2>
+    const intervalId = setInterval(updateLoadingMessage, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isLoading]);
+
+  return (
+    <div>
+      <NavbarComplaints />
+
+      <div className="container-fluid"></div>
+
+      <div className="col-md-12 p-4">
+        <div
+          className="custom-card"
+          style={{
+            backgroundColor: "#ffffff",
+            maxWidth: "720px",
+            height: "40%",
+            margin: "5px auto",
+            padding: "40px",
+            borderRadius: "10px",
+            border: "1px solid #ddd",
+            overflow: "auto",
+          }}
+        >
+          <h1 className="mb-4" style={{ color: "#ac2358", fontSize: "30px" }}>
+            Add Complaint
+          </h1>
+          <h3 className="card-title" style={{ margin: "20px auto", fontSize: "20px" }}>
+            What can I help you with?
+          </h3>
+
+          <form onSubmit={handleAdd}>
+            <div className="mb-3">
+              <div style={{ position: "relative" }}>
+                <select
+                  className="form-control"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  style={{ fontSize: "15px", padding: "5px" }}
+                >
+                  <option value="">Select an option</option>
+                  <option value="Login And Account">Account login issues</option>
+                  <option value="Incorrect transaction amount">Incorrect transaction amount</option>
+                  <option value="Simple balance inquiries">Simple balance inquiries</option>
+                  <option value="Lost or stolen card cases">Card and ATM</option>
+                  <option value="Address or contact information updates">Address or contact information updates</option>
+                  <option value="Urgent loan or mortgage inquiries">Urgent loan or mortgage inquiries</option>
+                  <option value="Technical issues on the bank's app or website">
+                    Technical issues on the bank's app or website
+                  </option>
+                  <option value="Account security concerns">Account security concerns</option>
+                  <option value="Billing or fee disputes">Billing or fee disputes</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                  }}
+                >
+                  &#9660;
+                </div>
               </div>
-              <div className="accordion">
+              {description === "Other" && (
+                <input
+                  type="text"
+                  className="form-control mt-2"
+                  placeholder="Enter description"
+                  value={otherDescription}
+                  onChange={(e) => setOtherDescription(e.target.value)}
+                  style={{ fontSize: "16px", padding: "10px" }}
+                />
+              )}
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{
+                borderRadius: "5px",
+                backgroundColor: "#ac2358",
+                margin: "10px auto",
+                color: "#fff",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "16px",
+                padding: "10px 12px",
+              }}
+            >
+              Add Complaint
+            </button>
+          </form>
+
+          {errorMessage && (
+            <p className="text-danger" style={{ color: "red" }}>
+              {errorMessage}
+            </p>
+          )}
+
+          {response && (
+            <p className="response-message" style={{ color: "#666" }}>
+              {response}
+            </p>
+          )}
+
+          {successMessage && (
+            <p className="text-success" style={{ color: "#333" }}>
+              {successMessage}
+            </p>
+          )}
+
+          {isLoading && (
+            <p className="loading-message" style={{ color: "#333" }}>
+              {loadingMessage}
+            </p>
+          )}
+        </div>
+
+        <div id="faq" className="text-center">
+          <div className="container">
+            <div className="section-title">
+              <h2>FAQs</h2>
+            </div>
+            <div className="accordion">
               {faqs && faqs.length > 0 ? (
                 faqs.map((faq, index) => (
                   <details key={index} className="faq-item">
@@ -194,12 +233,12 @@ function AddComplaints({ userData }) {
               ) : (
                 <p>No FAQs match your search.</p>
               )}
-              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   );
 }
 
-  export default AddComplaints
+export default AddComplaints;

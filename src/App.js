@@ -28,6 +28,8 @@ import ViewComplaints from "./Components/ViewComplaints/ViewComplaints";
 import UpdateAdmin from "./Components/UpdateUserPage/UpdateAdmin";
 import ComplaintChart from "./Components/ComplaintChart";
 import AdminComplaintChart from "./Components/AdminComplaintChart";
+import AdminComplaintTables from "./Components/AdminComplaintTables";
+import AdminResolutionChart from "./Components/AdminResolutionTimeCharts";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -97,6 +99,8 @@ function App() {
           <Route path="/AddComplaints" element={<AddComplaints userData={userData} />} />
           <Route path="/complaint-chart" element={<ComplaintChart />} />
           <Route path="/AdminComplaintChart" element={<AdminComplaintChart />} />
+          <Route path="/AdminComplaints" element={<AdminComplaintTables/>} />
+          <Route path="/ResolvedTime" element={<AdminResolutionChart/>} />
         </Routes>
       </Router>
     </TokenContextProvider>

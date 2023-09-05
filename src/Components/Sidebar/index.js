@@ -8,6 +8,8 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHistory } from '@fortawesome/free-solid-svg-icons'
 
 //Manager
 const Sidebar = () => {
@@ -27,8 +29,16 @@ const Sidebar = () => {
             <NavLink exact to="/complaint-chart" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line" style={{ color: '#524545' }}>chart</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/ResolvedTime" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line" style={{ color: '#524545' }}>Resolved Time</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/AdminComplaintChart" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line" style={{ color: '#524545' }}>Admin Performance</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/AdminComplaints" activeClassName="activeClicked">
+              <CDBSidebarMenuItem style={{ color: '#524545' }}>
+              <FontAwesomeIcon icon={faHistory} /> Complaints History
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/updateAdmin" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user" style={{ color: '#524545' }}>Edit Profile</CDBSidebarMenuItem>
@@ -38,7 +48,7 @@ const Sidebar = () => {
               <CDBSidebarMenuItem icon="user" style={{ color: '#524545' }}>Logout</CDBSidebarMenuItem>
             </NavLink>
             
-            
+          
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

@@ -65,6 +65,12 @@ function ResetPasswordPage() {
       setErrorMessage("Passwords don't match.");
       return;
     }
+    if (password.length < 4) {
+      setErrorMessage('Password must have at least 4 characters.');
+      return;
+    }else {
+      setErrorMessage('');
+    }
 
     try {
       const response = await fetch('http://localhost:8080/auth/customer/reset-password', {

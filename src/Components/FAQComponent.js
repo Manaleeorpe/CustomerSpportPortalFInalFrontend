@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faMicrophone, faMicrophoneSlash } from "@fortawesome/free-solid-svg-icons";
 
 const FAQComponent = () => {
   const [faqs, setFaqs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredFaqs, setFilteredFaqs] = useState([]);
+  const [isListening, setIsListening] = useState(false);
+  const [recognition, setRecognition] = useState(null);
 
   useEffect(() => {
     // Fetch FAQs from the server
@@ -30,6 +34,30 @@ const FAQComponent = () => {
     setSearchQuery(event.target.value);
   };
 
+  const handleSearch = () => {
+    // Perform search based on the current searchQuery
+    // You can implement the search logic here
+  };
+
+  const startVoiceRecognition = () => {
+    const recognitionInstance = new window.webkitSpeechRecognition();
+    recognitionInstance.onresult = (event) => {
+      const recognizedText = event.results[0][0].transcript;
+      const cleanedText = recognizedText.toLowerCase().replace(".", ""); // Convert to lowercase and remove periods
+      setSearchQuery(cleanedText); // Update the search query with cleaned text
+    };
+    recognitionInstance.start();
+    setRecognition(recognitionInstance);
+    setIsListening(true);
+  };
+
+  const stopVoiceRecognition = () => {
+    if (recognition) {
+      recognition.stop();
+      setIsListening(false);
+    }
+  };
+
   return (
     <div id="faqs" style={{ backgroundColor: "#ac2358", padding: "40px 0", marginTop: "20px" }}>
       <div className="container">
@@ -38,22 +66,32 @@ const FAQComponent = () => {
         </div>
         <div className="row justify-content-center">
           <div className="col-md-8">
-            <div className="search-bar" style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
+            <div className="search-bar" style={{ backgroundColor: "#fff", borderRadius: "4px", display: "flex", alignItems: "center", marginBottom: "20px" }}>
+              <button onClick={handleSearch} style={{ padding: "5px 10px", marginLeft: "5px", border: "none" }}>
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  style={{ fontSize: "24px", color: "#ac2358" }}
+                />
+              </button>
               <input
                 type="text"
                 placeholder="Search FAQs by type"
                 value={searchQuery}
                 onChange={handleSearchChange}
                 style={{
-                  width: "100%",
-                  padding: "10px 30px 10px 10px",
+                  flex: "1",
+                  padding: "10px 10px 10px 10px", // Adjusted padding
                   fontSize: "16px",
-                  backgroundImage: `url('img/search.png')`, 
-                  backgroundSize: "40px 40px", 
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "right 10px center",
+                  border: "none",
+                  outline: "none",
                 }}
               />
+              <button onClick={isListening ? stopVoiceRecognition : startVoiceRecognition} style={{ padding: "5px 10px", marginRight: "5px", border: "none" }}>
+                <FontAwesomeIcon
+                  icon={isListening ? faMicrophoneSlash : faMicrophone}
+                  style={{ fontSize: "24px", color: isListening ? "red" : "#ac2358" }}
+                />
+              </button>
             </div>
           </div>
         </div>
@@ -74,7 +112,7 @@ const FAQComponent = () => {
                 }}
               >
                 <div className="faq-content">
-                <p style={{ fontWeight: "bold", fontSize: "15px" }}>{faq.question}</p>
+                  <p style={{ fontWeight: "bold", fontSize: "15px" }}>{faq.question}</p>
                   <div style={{ fontSize: "15px" }}>{faq.answer}</div>
                 </div>
               </div>
@@ -87,15 +125,3 @@ const FAQComponent = () => {
 };
 
 export default FAQComponent;
-
-
-
-
-
-
-
-
-
-
-
-

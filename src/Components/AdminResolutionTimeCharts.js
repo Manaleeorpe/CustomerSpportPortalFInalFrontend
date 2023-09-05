@@ -18,13 +18,13 @@ const chartContainerStyle = {
     marginTop: '1rem',
   };
 
-const AdminComplaintChart = () => {
+const AdminResolutionChart = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/auth/admin/admin-complaint-counts', {
+        const response = await axios.get('http://localhost:8080/auth/admin/admin-resolution-time', {
           withCredentials: true, // Include credentials
         });
         const modifiedData = response.data.map((item, index) => ({
@@ -95,56 +95,6 @@ const AdminComplaintChart = () => {
         <Label value="Complaints" angle={-90} position="insideLeft" />
     </YAxis>  
     <Tooltip
-        content={(props) => (
-            <div style={{
-            border: '#bbb 1.5px solid',
-            }}>
-            <p style={{
-            margin: '0 0',
-            padding: '3px 7.5px',
-            backgroundColor: 'white',
-            }}>
-            <Mui.Typography component="legend" style={{ fontSize: 'small' }}>Rating</Mui.Typography>
-            <Mui.Rating name="read-only" value={props.payload && props.payload[0] != null && props.payload[0].payload.AverageRating} readOnly style={{ fontSize: 'small' }} />
-            </p>
-                
-            <p style={{
-                margin: '0 0',
-                padding: '3px 7.5px',
-                backgroundColor: 'white',
-                color: "#FFA500"
-            }}>
-                Pending Complaints : {' '}
-                {props.payload && props.payload[0] != null && props.payload[0].payload.Pending}
-            </p>
-            <p style={{
-                margin: '0 0',
-                padding: '3px 7.5px',
-                backgroundColor: 'white',
-                color: "#008000"
-            }}>
-               Resolved Complaints : {' '}
-                {props.payload && props.payload[0] != null && props.payload[0].payload.Resolved}
-            </p>
-            <p style={{
-                margin: '0 0',
-                padding: '3px 7.5px',
-                backgroundColor: 'white',
-                color: "#98144d"
-            }}>
-                Cancelled Complaints : {' '}
-                {props.payload && props.payload[0] != null && props.payload[0].payload.Cancelled}
-            </p>
-            <p style={{
-                margin: '0 0',
-                padding: '3px 7.5px',
-                backgroundColor: 'white',
-            }}>
-                {props.payload && props.payload[0] != null && props.payload[0].payload.ResolvedPercentage}
-            </p>
-           
-            </div>
-        )}
         />
       <Legend />
       <Bar dataKey="Pending" fill="#FFA500" />
@@ -159,5 +109,5 @@ const AdminComplaintChart = () => {
   );
 };
 
-export default AdminComplaintChart;
+export default AdminResolutionChart;
 

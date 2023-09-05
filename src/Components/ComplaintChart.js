@@ -43,14 +43,22 @@ const ComplaintChart = () => {
             withCredentials: true, // Include credentials
           }
         );
-        
         const data = Object.entries(response.data).map(
           ([complaintType, count]) => ({
             complaintType,
             count,
           })
         );
-        setComplaintTypeCounts(data);
+
+        // Define your custom sorting order
+        const customSortOrder = ['level 1', 'level 2', 'level 3'];
+
+        // Sort the data based on the custom sorting order
+        const sortedData = data.sort((a, b) =>
+          customSortOrder.indexOf(a.complaintType.toLowerCase()) - customSortOrder.indexOf(b.complaintType.toLowerCase())
+        );
+
+        setComplaintTypeCounts(sortedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -114,7 +122,7 @@ const ComplaintChart = () => {
               <Legend />
               <Bar dataKey="count" fill={barColor} />
             </BarChart>
-          )  : chartType === 'pie' ? (
+          ) : chartType === 'pie' ? (
             <PieChart width={600} height={400}>
               <Tooltip />
               <Legend />
@@ -132,26 +140,26 @@ const ComplaintChart = () => {
                 ))}
               </Pie>
             </PieChart>
-            ) : (
-              <LineChart width={600} height={400} data={complaintTypeCounts}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="complaintType" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone" // Use 'monotone' for smooth lines
-                  dataKey="count"
-                  name="Complaint Count"
-                  stroke={lineColor}
-                  activeDot={{ r: 8 }} // Customize the style of active dots
-                />
-             </LineChart>
-        )}
+          ) : (
+            <LineChart width={600} height={400} data={complaintTypeCounts}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="complaintType" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone" // Use 'monotone' for smooth lines
+                dataKey="count"
+                name="Complaint Count"
+                stroke={lineColor}
+                activeDot={{ r: 8 }} // Customize the style of active dots
+              />
+            </LineChart>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default ComplaintChart;
