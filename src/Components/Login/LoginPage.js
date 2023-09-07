@@ -134,7 +134,7 @@ function LoginPage() {
                 Sign into your account
               </h5>
               <MDBInput
-                wrapperClass="mb-4"
+                wrapperClass="mb-4 custom-label-font-size2 custom-input-font-size2"
                 label="Username"
                 id="formControlLg"
                 type="text"
@@ -146,7 +146,7 @@ function LoginPage() {
               />
 
               <MDBInput
-                wrapperClass="mb-4"
+                wrapperClass="mb-4 custom-label-font-size2 custom-input-font-size2"
                 label="Password"
                 id="formControlLg"
                 type="password"
@@ -169,9 +169,8 @@ function LoginPage() {
               <div>
                 {failMessage && (
                   <div
-                    className="alert alert-fail"
+                    className="alert alert-danger"
                     role="alert"
-                    style={{ backgroundColor: 'red', color: 'white' }}
                   >
                     {failMessage}
                   </div>

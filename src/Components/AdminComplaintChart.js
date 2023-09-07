@@ -7,6 +7,8 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import * as Mui from '@mui/material';
+import TopCards from './ComplaintTracker';
+import ComplaintTracker from './ComplaintTracker';
 
 const chartContainerStyle = {
     display: 'flex',
@@ -14,8 +16,8 @@ const chartContainerStyle = {
     alignItems: 'center',
     justifyContent: 'center',
     height: 'calc(100vh - 5rem)',
-    margin: '0 18rem',
-    marginTop: '1rem',
+    marginLeft: '20px',
+    marginTop: '10px'
   };
 
 const AdminComplaintChart = () => {
@@ -41,20 +43,6 @@ const AdminComplaintChart = () => {
     fetchData();
   }, []);
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      const resolvedPercentage = payload[0].payload.ResolvedPercentage;
-      return (
-        <div className="custom-tooltip">
-          <p className="intro">{resolvedPercentage}</p>
-        </div>
-      );
-    }
-
-    return null;
-  };
-
-  
   return (
     <div>
       <Navbar
@@ -85,13 +73,15 @@ const AdminComplaintChart = () => {
       </Navbar>
     <div style={{ display: 'flex' }}>
         <Sidebar />
+        
         <div style={chartContainerStyle}>
-          <h2>Admin Performance Overview</h2>
+          <h2 style={{ color: '#98144d' }}>Admin Performance Overview</h2>
+          <ComplaintTracker />
 
-    <BarChart width={600} height={400} data={data}>
+    <BarChart width={900} height={450} data={data} >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="adminid" />
-      <YAxis domain={[0, 'dataMax + 2']} >
+      <YAxis >
         <Label value="Complaints" angle={-90} position="insideLeft" />
     </YAxis>  
     <Tooltip
@@ -112,16 +102,25 @@ const AdminComplaintChart = () => {
                 margin: '0 0',
                 padding: '3px 7.5px',
                 backgroundColor: 'white',
-                color: "#FFA500"
+                color: "#F2789B"
             }}>
                 Pending Complaints : {' '}
                 {props.payload && props.payload[0] != null && props.payload[0].payload.Pending}
             </p>
             <p style={{
+              margin: '0 0',
+              padding: '3px 7.5px',
+              backgroundColor: 'white',
+              color: "#e63655"
+            }}>
+              In Progress Complaints :{' '}
+              {props.payload && props.payload[0] != null ? props.payload[0].payload['In Progress'] : 'N/A'}
+            </p>
+            <p style={{
                 margin: '0 0',
                 padding: '3px 7.5px',
                 backgroundColor: 'white',
-                color: "#008000"
+                color: "#95070a"
             }}>
                Resolved Complaints : {' '}
                 {props.payload && props.payload[0] != null && props.payload[0].payload.Resolved}
@@ -130,7 +129,7 @@ const AdminComplaintChart = () => {
                 margin: '0 0',
                 padding: '3px 7.5px',
                 backgroundColor: 'white',
-                color: "#98144d"
+                color: "#9a9681"
             }}>
                 Cancelled Complaints : {' '}
                 {props.payload && props.payload[0] != null && props.payload[0].payload.Cancelled}
@@ -146,10 +145,12 @@ const AdminComplaintChart = () => {
             </div>
         )}
         />
+     
+      <Bar dataKey="Pending" fill="#F2789B" />
+      <Bar dataKey="In Progress" fill="#e63655" />
+      <Bar dataKey="Resolved" fill="#9a9681" />
+      <Bar dataKey="Cancelled" fill="#e92032" />
       <Legend />
-      <Bar dataKey="Pending" fill="#FFA500" />
-      <Bar dataKey="Resolved" fill="#008000" />
-      <Bar dataKey="Cancelled" fill="#98144d" />
 
 
     </BarChart>

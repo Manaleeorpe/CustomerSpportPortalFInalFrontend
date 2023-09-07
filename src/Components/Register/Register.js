@@ -3,8 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EngineerDashboardHeader from '../Header/EngineerDasboardHeader';
-import Axisgirl from "../../assets/images/bg/axis girl.png";
-
+import Axisgirl from '../../assets/images/bg/axis girl.png';
 import './Register.css'; // Import your CSS file with the styles
 import {
   MDBBtn,
@@ -119,7 +118,7 @@ function Register() {
               <MDBCardBody>
                 <div className="d-flex flex-row mt-2">
                   <img
-                    src="/img/axis a.png"
+                    src="/img/Axis.jpeg"
                     alt="Axis"
                     style={{
                       width: '3rem',
@@ -139,7 +138,7 @@ function Register() {
                   Sign into your account
                 </h5>
                 <MDBInput
-                  wrapperClass="mb-4"
+                  wrapperClass="mb-4 custom-label-font-size custom-input-font-size "
                   label="Username"
                   id="formControlLg"
                   type="text"
@@ -152,13 +151,12 @@ function Register() {
                   onBlur={() => validateUsername(username)}
                 />
                 {usernameError && (
-                  <div className="alert alert-danger" role="alert" style={{ backgroundColor: 'red', color: 'white' }}>
-                    
+                 <div className="alert alert-danger" role="alert">
                     {usernameError}
                   </div>
                 )}
                 <MDBInput
-                  wrapperClass="mb-4"
+                  wrapperClass="mb-4 custom-label-font-size custom-input-font-size"
                   label="Email Address"
                   id="formControlLg"
                   type="text"
@@ -168,14 +166,15 @@ function Register() {
                     setEmail(e.target.value);
                   }}
                   onBlur={() => validateEmail(email)}
+                  className="custom-label-font-size"
                 />
                 {emailError && (
-                  <div className="alert alert-danger" role="alert" style={{ backgroundColor: 'red', color: 'white' }}>
+                  <div className="alert alert-danger" role="alert">
                     {emailError}
                   </div>
                 )}
                 <MDBInput
-                  wrapperClass="mb-4"
+                  wrapperClass="mb-4 custom-label-font-size custom-input-font-size"
                   label="Phone Number"
                   id="formControlLg"
                   type="text"
@@ -187,12 +186,12 @@ function Register() {
                   onBlur={() => validatePhone(phone_number)}
                 />
                 {phoneError && (
-                  <div className="alert alert-danger" role="alert" style={{ backgroundColor: 'red', color: 'white' }}>
+                 <div className="alert alert-danger" role="alert">
                     {phoneError}
                   </div>
                 )}
                 <MDBInput
-                  wrapperClass="mb-4"
+                  wrapperClass="mb-4 custom-label-font-size custom-input-font-size"
                   label="Password"
                   id="formControlLg"
                   type="password"
@@ -204,7 +203,7 @@ function Register() {
                   onBlur={() => validatePassword(password)}
                 />
                 {passwordError && (
-                  <div className="alert alert-danger" role="alert" style={{ backgroundColor: 'red', color: 'white' }}>
+                  <div className="alert alert-danger" role="alert">
                     {passwordError}
                   </div>
                 )}

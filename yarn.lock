@@ -1448,6 +1448,23 @@
   dependencies:
     prop-types "^15.8.1"
 
+"@fullcalendar/core@~6.1.8":
+  version "6.1.8"
+  resolved "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.8.tgz"
+  integrity sha512-i8JBIvZCWGO9dsMEDcx9bnsQZ9PtGSJdOXGgWbhLaGq2iq41OBdp9g9gM4b/Otv2oK8bL5Gl6CsMmb/HkDtA6Q==
+  dependencies:
+    preact "~10.12.1"
+
+"@fullcalendar/daygrid@^6.1.8":
+  version "6.1.8"
+  resolved "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-6.1.8.tgz"
+  integrity sha512-kCZxQFKb9Vqa3CZRX0v7rMSJ2mlTt4gDpyLfiNJKxUAq7W51uKurPaFZWicaXy1ESHVBxKNlbx5uNjBpyu50JQ==
+
+"@fullcalendar/react@^6.1.8":
+  version "6.1.8"
+  resolved "https://registry.npmjs.org/@fullcalendar/react/-/react-6.1.8.tgz"
+  integrity sha512-E8GQSQyZHkjpwxQW5Vci7iZgN7f33ntuRcvfGii4Fn35t9VHGz2SEyKAWXpVf38elcKTZKVgajU9ipStd+1LEg==
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
   resolved "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.10.tgz"
@@ -8359,6 +8376,11 @@ postcss@^7.0.35:
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
+preact@~10.12.1:
+  version "10.12.1"
+  resolved "https://registry.npmjs.org/preact/-/preact-10.12.1.tgz"
+  integrity sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
@@ -8566,6 +8588,11 @@ react-bootstrap@^2.8.0, react-bootstrap@>=1.0.0:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
+react-customizable-progressbar@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/react-customizable-progressbar/-/react-customizable-progressbar-1.2.0.tgz"
+  integrity sha512-zNaFa8ynfslfVt5mqgDcIQgx9/UN0ohGH0wj1apA4DauMPd1bYNk3KDSu+sdbfhONNVDC8TOWSr6hH3tyX4oHw==
+
 react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"
@@ -8601,7 +8628,7 @@ react-dom@^0.14.1:
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-0.14.10.tgz"
   integrity sha512-kDs8SWFb8Sry4NAplhpJbZEeAnTPir/m+s9s+lkdqA2a89BzmWGnEgGG/CfmhULjv1ogc4oHrjMfAvFNruT3jQ==
 
-"react-dom@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^15.5.4 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8.0 || ^17 || ^18", "react-dom@^17.0.0 || ^18.0.0", react-dom@^18.0.0, react-dom@^18.1.0, react-dom@^18.2.0, "react-dom@>= 16.8.0", react-dom@>=15.0.0, react-dom@>=16, react-dom@>=16.0.0, react-dom@>=16.13.0, react-dom@>=16.14.0, react-dom@>=16.6.0, react-dom@>=16.8, react-dom@>=16.8.0, react-dom@>=17.0.0:
+"react-dom@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^15.5.4 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.7.0 || ^17 || ^18", "react-dom@^16.8.0 || ^17 || ^18", "react-dom@^17.0.0 || ^18.0.0", react-dom@^18.0.0, react-dom@^18.1.0, react-dom@^18.2.0, "react-dom@>= 16.8.0", react-dom@>=15.0.0, react-dom@>=16, react-dom@>=16.0.0, react-dom@>=16.13.0, react-dom@>=16.14.0, react-dom@>=16.6.0, react-dom@>=16.8, react-dom@>=16.8.0, react-dom@>=17.0.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -8808,6 +8835,13 @@ react-transition-group@2.9.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+"react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.5.4 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.7.0 || ^17 || ^18", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.1.0, react@^18.2.0, "react@>= 16", "react@>= 16.8.0", react@>=0.14.0, react@>=15.0.0, react@>=16, react@>=16.0.0, react@>=16.13, react@>=16.13.0, react@>=16.14.0, react@>=16.3, react@>=16.6.0, react@>=16.8, react@>=16.8.0, react@>=17.0.0:
+  version "18.2.0"
+  resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
+  integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
+  dependencies:
+    loose-envify "^1.1.0"
+
 react@^0.14.1, react@^0.14.10:
   version "0.14.10"
   resolved "https://registry.npmjs.org/react/-/react-0.14.10.tgz"
@@ -8815,13 +8849,6 @@ react@^0.14.1, react@^0.14.10:
   dependencies:
     envify "^3.0.0"
     fbjs "^0.6.1"
-
-"react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.5.4 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.1.0, react@^18.2.0, "react@>= 16", "react@>= 16.8.0", react@>=0.14.0, react@>=15.0.0, react@>=16, react@>=16.0.0, react@>=16.13, react@>=16.13.0, react@>=16.14.0, react@>=16.3, react@>=16.6.0, react@>=16.8, react@>=16.8.0, react@>=17.0.0:
-  version "18.2.0"
-  resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
-  integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
-  dependencies:
-    loose-envify "^1.1.0"
 
 reactstrap@^9.2.0:
   version "9.2.0"

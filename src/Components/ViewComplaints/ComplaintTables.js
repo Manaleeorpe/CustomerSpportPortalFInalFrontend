@@ -171,20 +171,30 @@ function ComplaintTables() {
                         <td>{formatStartDate(complaint.date)}</td>
 
                         <td>
-                        {complaint.status === "Pending"
+                        {complaint.status === "Pending" || complaint.status === "In Progress"
                           ? formatEndDate(complaint.date, complaint.complaintType)
                           : "-"
                         }
                       </td>
                         <td>
-                      <span className={`status-badge ${complaint.status.toLowerCase()}`}>
-                    <strong>{complaint.status}</strong>
-                    </span>
+                        {complaint.status === "Pending" && (
+                          <button style={{ backgroundColor: 'yellow' }} className="btn btn-lg mr-2" >Pending</button>
+                        )}
+                        {complaint.status === "Cancelled" && (
+                          <button className="btn btn-danger btn-lg mr-2">Cancelled</button>
+                        )}
+                        {complaint.status === "Resolved" && (
+                          <button className="btn btn-success btn-lg mr-2">Resolved</button>
+                        )}
+                        {complaint.status === "In Progress" && (
+                          <button style={{ backgroundColor: 'orange' }} className="btn btn-lg mr-2">In Progress</button>
+                        )}
+
                       </td>
                       <td>
-                        {complaint.status === "Pending" &&
+                        {(complaint.status === "Pending" || complaint.status === "In Progress") &&
                         <button
-                          className="btn btn-success mr-2"
+                          className="btn btn-success btn-lg mr-2"
                           onClick={() => handleCancellationWithConfirmation(complaint.complaintid)}
                         >
                           Cancel Complaint
@@ -240,16 +250,16 @@ function ComplaintTables() {
             </div>
           )}
           <Mui.Dialog
-  open={isCancelConfirmationOpen}
-  onClose={() => setCancelConfirmationOpen(false)}
->
-  <Mui.DialogTitle>Confirm Cancellation</Mui.DialogTitle>
-  <Mui.DialogContent>
-    <Mui.DialogContentText>
-      Are you sure you want to cancel this complaint?
-    </Mui.DialogContentText>
-  </Mui.DialogContent>
-  <Mui.DialogActions>
+          open={isCancelConfirmationOpen}
+          onClose={() => setCancelConfirmationOpen(false)}
+        >
+          <Mui.DialogTitle>Confirm Cancellation</Mui.DialogTitle>
+         <Mui.DialogContent>
+        <Mui.DialogContentText>
+        Are you sure you want to cancel this complaint?
+        </Mui.DialogContentText>
+      </Mui.DialogContent>
+       <Mui.DialogActions>
     <button
       className="btn btn-danger"
       onClick={() => handleCancellation(cancelComplaintId)}

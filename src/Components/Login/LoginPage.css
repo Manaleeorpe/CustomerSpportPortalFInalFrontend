@@ -1,10 +1,18 @@
 /* LoginPage.css */
 
 .custom-card-column {
-    background-color: white; /* Set your desired background color */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Custom box shadow */
-    padding: 20px; /* Add padding around the card */
-    margin-top: 70px; /* Adjust as needed */
-    width: 90vh; /* Adjust the height as needed */
-  }
-  
+  background-color: white; /* Set your desired background color */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Custom box shadow */
+  padding: 20px; /* Add padding around the card */
+  margin-top: 70px; /* Adjust as needed */
+  width: 90vh; /* Adjust the height as needed */
+}
+body{
+  background-color: #f9f9fb;
+}
+.custom-label-font-size2 label {
+  font-size: 16px; /* Adjust the size as needed */
+}
+.custom-input-font-size2 input {
+  font-size: 15px; /* Adjust the size as needed */
+}

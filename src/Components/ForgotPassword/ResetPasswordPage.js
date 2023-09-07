@@ -117,7 +117,7 @@ function ResetPasswordPage() {
             <MDBCard className="custom-card-column">
               <MDBCardBody>
                 <div className='d-flex flex-row mt-2'>
-                  <img src="/img/axis a.png" alt="Axis" style={{ width: '3rem', height: '3rem', marginRight: '0.75rem', color: '#98144d' }} />
+                  <img src="/img/Axis.jpeg" alt="Axis" style={{ width: '3rem', height: '3rem', marginRight: '0.75rem', color: '#98144d' }} />
                   <span className="h1 fw-bold mb-0">Customer Support Portal</span>
                 </div>
                 <h5 className="fw-normal my-4 pb-3" style={{ letterSpacing: '1px' }}>

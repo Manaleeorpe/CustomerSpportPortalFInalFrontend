@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo} from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Card, CardBody, CardTitle, Table } from "reactstrap";
 import user1 from "../../assets/images/users/user1.jpeg";
 import user2 from "../../assets/images/users/user2.jpeg";
@@ -10,9 +10,10 @@ function ProjectTables() {
   const [complaints, setComplaints] = useState([]);
   const [adminComments, setAdminComments] = useState("");
   const adminid = localStorage.getItem('adminid');
-  const [statusMessage, setStatusMessage] = useState("");
-  const [loadingComplaint, setLoadingComplaint] = useState(null); 
-  
+  const [statusMessageInProgress, setStatusMessageInProgress] = useState("");
+  const [statusMessageResolved, setStatusMessageResolved] = useState("");
+  const [loadingComplaint, setLoadingComplaint] = useState(null);
+
   useEffect(() => {
     if (adminid) {
       fetchComplaints();
@@ -20,7 +21,6 @@ function ProjectTables() {
       console.log('adminid is missing. Cannot fetch complaints.');
     }
   }, [adminid]);
-
 
   const fetchComplaints = async () => {
     try {
@@ -45,15 +45,16 @@ function ProjectTables() {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  //To resolved
   const handleStatusUpdate = (complaintid, status) => {
     let endpoint = `http://localhost:8080/auth/admin/updateComplaint/${complaintid}`;
-  
+
     const requestBody = {
       status: status,
       adminComments: adminComments
     };
     setLoadingComplaint(complaintid);
-  
+
     fetch(endpoint, {
       method: "PUT",
       credentials: 'include',
@@ -64,15 +65,49 @@ function ProjectTables() {
     })
       .then((response) => {
         if (response.ok) {
-          setStatusMessage(`Success: Complaint ${complaintid} status is set to: ${status}`);
+          setStatusMessageResolved(`Success: Complaint ${complaintid} status is set to: ${status}`);
           fetchComplaints();
+
+          setTimeout(() => {
+            setStatusMessageResolved(null);
+          }, 3000);
         } else {
           alert("Complaint did not update");
         }
         setLoadingComplaint(null);
       });
+  };
 
-      
+  //To inprogress
+  const handlePendingUpdate = (complaintid, status) => {
+    let endpoint = `http://localhost:8080/auth/admin/Inprogress/${complaintid}`;
+
+    const requestBody = {
+      status: status,
+    };
+    setLoadingComplaint(complaintid);
+
+    fetch(endpoint, {
+      method: "PUT",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setStatusMessageInProgress(`Success: Complaint ${complaintid} status is set to: ${status}`);
+          fetchComplaints();
+
+          setTimeout(() => {
+            setStatusMessageInProgress(null);
+          }, 3000);
+        } else {
+          alert("Complaint did not update");
+        }
+        setLoadingComplaint(null);
+      });
   };
 
   return (
@@ -93,11 +128,11 @@ function ProjectTables() {
                 <th></th>
               </tr>
             </thead>
-            
+
             <tbody>
               {complaints && complaints.length > 0 ? (
                 complaints
-                  .filter((complaint) => complaint.status === "Pending")
+                  .filter((complaint) => complaint.status === "Pending" || complaint.status === "In Progress")
                   .map((complaint, index) => (
                     <tr key={index} className="border-top">
                       <td>
@@ -120,28 +155,35 @@ function ProjectTables() {
                       <td>
                         <span className="p-2 bg-warning rounded-circle d-inline-block ms-3"></span>
                       </td>
-                     
+
                       <td>
+                        {(complaint.status === "In Progress" && (
                           <input
                             className="form-control"
                             value={complaint.adminComments}
                             placeholder="Comments"
                             onChange={(e) => setAdminComments(e.target.value)}
                           />
-                        </td>
+                        ))}
+                      </td>
 
-                        <td>
+                      <td>
                         {loadingComplaint === complaint.complaintid ? (
                           <div className="text-center">
                             <i className="fa fa-spinner fa-spin"></i> Please wait...
                           </div>
                         ) : (
-                          <button
-                            className="btn btn-success mr-2"
-                            onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved")}
-                          >
-                            Resolved
-                          </button>
+                          (complaint.status === "Pending" && (
+                            <button style={{ backgroundColor: 'orange' }} className="btn btn-lg mr-2" onClick={() => handlePendingUpdate(complaint.complaintid, "In Progress")} >
+                              In Progress
+                            </button>
+                          )) || (
+                            (complaint.status === "In Progress" && (
+                              <button className="btn btn-success mr-2" onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved")} >
+                                Resolved
+                              </button>
+                            ))
+                          )
                         )}
                       </td>
                     </tr>
@@ -153,16 +195,28 @@ function ProjectTables() {
               )}
             </tbody>
           </Table>
-          
+
         </CardBody>
       </Card>
-      {statusMessage && (
-            <div className="mt-3">
-              <div className="alert alert-success" role="alert">
-                {statusMessage}
-              </div>
-            </div>
-          )}
+      {statusMessageInProgress && (
+        <div className="mt-3">
+          <div
+            className="alert alert-warning"
+            role="warning"
+            style={{ backgroundColor: 'orange' }}
+          >
+            {statusMessageInProgress}
+          </div>
+        </div>
+      )}
+
+      {statusMessageResolved && (
+        <div className="mt-3">
+          <div className="alert alert-success" role="alert">
+            {statusMessageResolved}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,19 @@
+/* Translucent effect for FullCalendar events */
+.translucent-event {
+    background-color: rgba(255, 0, 0, 0.5); /* Red with opacity */
+    /* Adjust the background color for other colors (purple and blue) as needed */
+    color: #fff; /* Text color */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+    border-color: red;
+  }
+  
+  .translucent-event.blue {
+    background-color: rgba(0, 0, 255, 0.5); /* Blue with opacity */
+    border-color: blue;
+  }
+  
+  .translucent-event.purple {
+    background-color: rgba(128, 0, 128, 0.5); /* Purple with opacity */
+    border-color: purple;
+  }

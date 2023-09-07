@@ -1,0 +1,10 @@
+/* Sidebar.css */
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 20px; /* Adjust the padding as needed */
+  }
+  
+  .sidebar-icon {
+    margin-right: 10px; /* Adjust the margin as needed */
+  }

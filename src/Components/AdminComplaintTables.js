@@ -109,7 +109,8 @@ function AdminComplaintTables() {
                 <th>Customer ID</th>
                 <th>Rating</th>
                 <th>Status</th>
-                <th>Complaint Date</th>
+                <th>Complaint Posted On</th>
+                <th>Complaint Resolved On</th>
               </tr>
             </thead>
             <tbody>
@@ -146,8 +147,26 @@ function AdminComplaintTables() {
                     Resolved
                     </button>
                     }
+                {complaint.status === "In Progress" &&
+                    <button style={{ backgroundColor: 'orange' }} className="btn btn mr-2">Progress</button>
+                    }
                   </td>
-                  <td>{new Date(complaint.date).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</td>
+                  
+                  <td>{new Date(complaint.StartDate).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}</td>
+                  <td>
+                    {complaint.EndDate ? (
+                      new Date(complaint.EndDate).toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true,
+                      })
+                    ) : (
+                      '-'
+                    )}
+                  </td>
 
                 </tr>
               ))}

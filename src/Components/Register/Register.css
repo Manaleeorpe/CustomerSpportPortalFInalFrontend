@@ -22,3 +22,15 @@
   background-color: green;
   color: white;
 }
+/* Increase font size for alert messages */
+.alert {
+  font-size: 14px;
+  margin-top: 20px; /* Adjust the size as needed */
+}
+.custom-label-font-size label {
+  font-size: 16px; 
+  padding-bottom: 10px;/* Adjust the size as needed */
+}
+.custom-input-font-size input {
+  font-size: 15px; /* Adjust the size as needed */
+}
