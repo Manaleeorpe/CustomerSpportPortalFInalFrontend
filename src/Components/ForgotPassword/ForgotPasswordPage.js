@@ -37,7 +37,7 @@ function ForgotPasswordPage() {
   
         if (response.ok) {
           setSuccessMessage('Password reset instructions sent to your email.');
-          navigate('/reset-password');
+          navigate('/');
           
         } else {
           const errorResponse = await response.json();

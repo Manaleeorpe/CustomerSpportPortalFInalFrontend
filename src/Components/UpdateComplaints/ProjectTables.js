@@ -110,11 +110,29 @@ function ProjectTables() {
       });
   };
 
+  function getStatusTextColor(status) {
+    switch (status) {
+      case 'Pending':
+        return 'rgba(255, 0, 0, 0.5)'; // Red color for 'Pending'
+      case 'In Progress':
+        return 'rgba(0, 0, 255, 0.5)'; // Blue color for 'In Progress'
+      case 'Resolved':
+        return 'rgba(128, 0, 128, 0.5)'; // Purple color for 'Resolved'
+      case 'Cancelled':
+        return 'rgba(102, 102, 102, 0.6)'; // Gray color for 'Cancelled'
+      default:
+        return 'inherit'; // Use the default text color
+    }
+  }
+  
+
   return (
     <div>
-      <Card>
+      <Card className="custom-card" style={{ marginTop: '-20px' , width: '1200px' , margin: '0 auto' }}>
         <CardBody>
-          <CardTitle tag="h5">Customer Complaints</CardTitle>
+        <h1 className="mb-4" style={{ color: "#ac2358" }}>
+            Update Complaint
+          </h1>
 
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
@@ -153,19 +171,24 @@ function ProjectTables() {
                       <td>{complaint.complaintType}</td>
                       <td>{complaint.description}</td>
                       <td>
-                        <span className="p-2 bg-warning rounded-circle d-inline-block ms-3"></span>
-                      </td>
+                      <span style={{ fontWeight: 'bold', color: getStatusTextColor(complaint.status) }}>
+                        {complaint.status}
+                      </span>
+                    </td>
 
-                      <td>
-                        {(complaint.status === "In Progress" && (
-                          <input
-                            className="form-control"
-                            value={complaint.adminComments}
-                            placeholder="Comments"
-                            onChange={(e) => setAdminComments(e.target.value)}
-                          />
-                        ))}
-                      </td>
+                    <td>
+                    {complaint.status === "In Progress" ? (
+                      <input
+                        className="form-control"
+                        value={complaint.adminComments}
+                        placeholder="Comments"
+                        onChange={(e) => setAdminComments(e.target.value)}
+                      />
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+
 
                       <td>
                         {loadingComplaint === complaint.complaintid ? (
@@ -174,12 +197,12 @@ function ProjectTables() {
                           </div>
                         ) : (
                           (complaint.status === "Pending" && (
-                            <button style={{ backgroundColor: 'orange' }} className="btn btn-lg mr-2" onClick={() => handlePendingUpdate(complaint.complaintid, "In Progress")} >
+                            <button style={{ backgroundColor: '#1167b1' , color: 'white', fontSize: '12px'}} className="btn btn mr-2" onClick={() => handlePendingUpdate(complaint.complaintid, "In Progress")} >
                               In Progress
                             </button>
                           )) || (
                             (complaint.status === "In Progress" && (
-                              <button className="btn btn-success mr-2" onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved")} >
+                              <button style={{fontSize: '16px'}} className="btn btn-success mr-2" onClick={() => handleStatusUpdate(complaint.complaintid, "Resolved")} >
                                 Resolved
                               </button>
                             ))

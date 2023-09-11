@@ -187,7 +187,7 @@ function ComplaintTables() {
                           <button className="btn btn-success btn-lg mr-2">Resolved</button>
                         )}
                         {complaint.status === "In Progress" && (
-                          <button style={{ backgroundColor: 'orange' }} className="btn btn-lg mr-2">In Progress</button>
+                          <button style={{ backgroundColor: '#1167b1' , color: 'white', fontSize: '12px'}} className="btn btn-lg mr-2">In Progress</button>
                         )}
 
                       </td>

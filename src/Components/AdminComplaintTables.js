@@ -82,10 +82,10 @@ function AdminComplaintTables() {
   <div style={{ display: 'flex' }}>
       <Sidebar />
     <div>
-      <Card className="custom-card" style={{ marginLeft: '90px',marginTop: '20px'  }}>
+    <Card className="custom-card" style={{ marginLeft: '80px',marginTop: '20px' ,marginRight:'80px' }}>
         <CardBody>
           <h1 className="mb-4" style={{ color: "#ac2358" }}>
-            Admin Complaints
+            Complaint History
           </h1>
           <div className="search-bar" style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
             <input
@@ -148,7 +148,7 @@ function AdminComplaintTables() {
                     </button>
                     }
                 {complaint.status === "In Progress" &&
-                    <button style={{ backgroundColor: 'orange' }} className="btn btn mr-2">Progress</button>
+                    <button style={{backgroundColor: '#1167b1' , color: 'white', fontSize: '16px' }} className="btn btn mr-2">Progress</button>
                     }
                   </td>
                   

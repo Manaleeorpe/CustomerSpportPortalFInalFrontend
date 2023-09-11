@@ -26,8 +26,9 @@ const chartContainerStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   height: 'calc(100vh - 5rem)', // Adjust the height and subtract the Navbar height
-  margin: '0 18rem', // Add margin to shift the chart a little to the right
+  margin: '0 14rem', // Add margin to shift the chart a little to the right
   marginTop: '1rem',
+  
 };
 
 const ComplaintChart = () => {
@@ -68,9 +69,8 @@ const ComplaintChart = () => {
   }, []);
 
   const barColor = '#98144d';
-  const pieColors = ['#98144d', '#ac2358', '#bf3c68'];
-  const lineColor = '#3c8dbc';
-
+  const pieColors = ['#79103d', '#a22b5e', '#b65a82'];
+  const lineColor = '#79103d';
   const toggleChartType = (newChartType) => {
     setChartType(newChartType);
   };
@@ -108,13 +108,13 @@ const ComplaintChart = () => {
         <Sidebar />
         <div style={chartContainerStyle}>
           <h2>Complaint Type Counts Chart</h2>
-          <div>
+          <div style={{ marginBottom: '30px' }}>
             <button onClick={() => toggleChartType('bar')}>Bar Chart</button>
             <button onClick={() => toggleChartType('pie')}>Pie Chart</button>
             <button onClick={() => toggleChartType('line')}>Line Chart</button>
           </div>
           {chartType === 'bar' ? (
-            <BarChart width={600} height={400} data={complaintTypeCounts}>
+            <BarChart width={740} height={480} data={complaintTypeCounts}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="complaintType" />
               <YAxis />
@@ -123,7 +123,7 @@ const ComplaintChart = () => {
               <Bar dataKey="count" fill={barColor} />
             </BarChart>
           ) : chartType === 'pie' ? (
-            <PieChart width={600} height={400}>
+            <PieChart width={720} height={480}>
               <Tooltip />
               <Legend />
               <Pie
@@ -132,7 +132,7 @@ const ComplaintChart = () => {
                 nameKey="complaintType"
                 cx="50%"
                 cy="50%"
-                outerRadius={120}
+                outerRadius={140}
                 fill="#8884d8"
               >
                 {complaintTypeCounts.map((entry, index) => (
@@ -141,7 +141,7 @@ const ComplaintChart = () => {
               </Pie>
             </PieChart>
           ) : (
-            <LineChart width={600} height={400} data={complaintTypeCounts}>
+            <LineChart width={720} height={470} data={complaintTypeCounts}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="complaintType" />
               <YAxis />

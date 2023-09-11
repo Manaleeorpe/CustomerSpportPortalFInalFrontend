@@ -170,7 +170,7 @@ function Calendar() {
       <div style={{ display: 'flex' }}>
         <Sidebar />
         <div>
-          <Card className="custom-card" style={{ marginLeft: '90px', marginTop: '20px' }}>
+        <Card className="custom-card" style={{ marginLeft: '80px', marginTop: '20px' ,marginRight: '80px'}}>
             <CardBody>
               <h1 className="mb-4" style={{ color: "#98144d" }}>
                 Admin Complaints

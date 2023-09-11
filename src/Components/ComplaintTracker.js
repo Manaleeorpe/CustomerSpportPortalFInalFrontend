@@ -30,31 +30,32 @@ const ComplaintTracker = () => {
   }, []);
 
   const cardStyle = {
-    width: "250px", // Set the width of the cards
+    width: "230px", // Set the width of the cards
     margin: "30px", // Add margin to all sides
   };
 
   const iconStyle = {
-    fontSize: "40px", // Adjust the font size to make the icon larger
+    fontSize: "40px",
+    color: "white", // Adjust the font size to make the icon larger
   };
 
 
   const pendingCardStyle = {
     ...cardStyle,
-    backgroundColor: "#F2789B", // Set the background color to yellow
+    backgroundColor: "rgba(255, 0, 0, 0.5)", 
   };
 
   const InProgressCardStyle = {
     ...cardStyle,
-    backgroundColor: "#e63655", // Set the background color to yellow
+    backgroundColor: "rgba(0, 0, 255, 0.5)", 
   };
   const ResolvedCardStyle = {
     ...cardStyle,
-    backgroundColor: "#9a9681" , // Set the background color to yellow
+    backgroundColor: "rgba(128, 0, 128, 0.5)" , 
   };
   const CancelledCardStyle = {
     ...cardStyle,
-    backgroundColor: "#e92032", // Set the background color to yellow
+    backgroundColor: "rgba(102, 102, 102, 0.6)", 
   };
 
   return (

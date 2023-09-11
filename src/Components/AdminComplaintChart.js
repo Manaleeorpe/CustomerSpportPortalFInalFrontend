@@ -102,7 +102,7 @@ const AdminComplaintChart = () => {
                 margin: '0 0',
                 padding: '3px 7.5px',
                 backgroundColor: 'white',
-                color: "#F2789B"
+                color: "rgba(255, 0, 0, 0.5)"
             }}>
                 Pending Complaints : {' '}
                 {props.payload && props.payload[0] != null && props.payload[0].payload.Pending}
@@ -111,7 +111,7 @@ const AdminComplaintChart = () => {
               margin: '0 0',
               padding: '3px 7.5px',
               backgroundColor: 'white',
-              color: "#e63655"
+              color: "rgba(0, 0, 255, 0.5)"
             }}>
               In Progress Complaints :{' '}
               {props.payload && props.payload[0] != null ? props.payload[0].payload['In Progress'] : 'N/A'}
@@ -120,7 +120,7 @@ const AdminComplaintChart = () => {
                 margin: '0 0',
                 padding: '3px 7.5px',
                 backgroundColor: 'white',
-                color: "#95070a"
+                color: "rgba(128, 0, 128, 0.5)"
             }}>
                Resolved Complaints : {' '}
                 {props.payload && props.payload[0] != null && props.payload[0].payload.Resolved}
@@ -129,7 +129,7 @@ const AdminComplaintChart = () => {
                 margin: '0 0',
                 padding: '3px 7.5px',
                 backgroundColor: 'white',
-                color: "#9a9681"
+                color: "rgba(102, 102, 102, 0.9)"
             }}>
                 Cancelled Complaints : {' '}
                 {props.payload && props.payload[0] != null && props.payload[0].payload.Cancelled}
@@ -146,10 +146,11 @@ const AdminComplaintChart = () => {
         )}
         />
      
-      <Bar dataKey="Pending" fill="#F2789B" />
-      <Bar dataKey="In Progress" fill="#e63655" />
-      <Bar dataKey="Resolved" fill="#9a9681" />
-      <Bar dataKey="Cancelled" fill="#e92032" />
+      <Bar dataKey="Pending" fill= "rgba(255, 0, 0, 0.5)"/>
+      <Bar dataKey="In Progress" fill="rgba(0, 0, 255, 0.5)" />
+      <Bar dataKey="Resolved" fill="rgba(128, 0, 128, 0.5)" />
+      <Bar dataKey="Cancelled" fill="rgba(102, 102, 102, 0.6)" />
+
       <Legend />
 
 
@@ -161,4 +162,3 @@ const AdminComplaintChart = () => {
 };
 
 export default AdminComplaintChart;
-
